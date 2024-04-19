@@ -139,7 +139,7 @@ def main():
                 st.subheader("Original Article:")
                 st.write(f"You can read the full article [here]({url}).")
             else:
-                st.error("Failed to summarize the article. Please check the URL.")
+                st.error("Failed to summarize the article. This news agency doesn't allow news parsing.")
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
