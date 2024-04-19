@@ -120,7 +120,9 @@ def main():
 
     if st.button("Summarize Article"):
         if not validators.url(url):
-            st.error("Please enter a valid URL.")
+            st.error(
+                "Please enter a valid URL or this news agency doesn't allow news parsing"
+            )
         else:
             article_info = summarize_article(url)
             if article_info:
@@ -141,12 +143,15 @@ def main():
                 st.subheader("Original Article:")
                 st.write(f"You can read the full article [here]({url}).")
             else:
-                st.error("Failed to summarize the article. Please check the URL.")
+                st.error(
+                    "Failed to summarize the article. This news agency doesn't allow news parsing."
+                )
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
+    st.header("Summarize Today's Top 5 News Articles From:")
     st.header("Summarize Today's Top 5 Articles From :")
     news_source = st.selectbox(
         "Select a news source:",
