@@ -118,7 +118,7 @@ def main():
 
     if st.button("Summarize Article"):
         if not validators.url(url):
-            st.error("Please enter a valid URL.")
+            st.error("Please enter a valid URL or this news agency doesn't allow news parsing")
         else:
             article_info = summarize_article(url)
             if article_info:
