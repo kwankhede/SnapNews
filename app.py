@@ -115,9 +115,10 @@ def main():
     st.image("images/banner.jpg", width=None)
     st.subheader("AI-Summarized news articles :")
 
+    default_url = "https://www.roundtableindia.co.in/from-oppression-to-liberation-a-transformative-journey-towards-egalitarianism-and-empowerment/"
     url = st.text_input(
-        "Enter URL here",
-        placeholder="https://www.roundtableindia.co.in/from-oppression-to-liberation-a-transformative-journey-towards-egalitarianism-and-empowerment/",
+        "Enter News URL here",
+        value=default_url,
         key="url_input",
     )
 
