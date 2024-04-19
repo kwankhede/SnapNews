@@ -117,7 +117,7 @@ def main():
 
     url = st.text_input(
         "Enter URL here",
-        placeholder="https://news_link_example.com/search",
+        placeholder="https://www.roundtableindia.co.in/from-oppression-to-liberation-a-transformative-journey-towards-egalitarianism-and-empowerment/",
         key="url_input",
     )
 
