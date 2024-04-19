@@ -2,6 +2,8 @@
 
 SnapNews is a Streamlit-based web application that provides AI-summarized news articles in 100 words or less. It utilizes the newspaper Python package for article scraping and summarization.
 
+![App Image](/images/app.png)
+
 ## Installation
 
 1. Clone the repository:
