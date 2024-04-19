@@ -145,7 +145,7 @@ def main():
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.header("Summarize Todays Top 5 Articles From :")
+    st.header("Summarize Today's Top 5 News Articles From:")
     news_source = st.selectbox(
         "Select a news source:", ["Indian Express", "Times of India", "India Today"]
     )
