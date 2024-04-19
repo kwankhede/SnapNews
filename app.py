@@ -113,13 +113,58 @@ import streamlit as st
 
 def main():
     st.image("images/banner.jpg", width=None)
-    st.subheader("AI-Summarized news articles in 100 words or less!")
+    st.subheader("AI-Summarized news articles :")
 
-    # Set default news source to Indian Express
-    news_source = "Indian Express"
+    url = st.text_input(
+        "Enter URL here",
+        placeholder="https://news_link_example.com/search",
+        key="url_input",
+    )
 
-    # Function to summarize articles
-    def summarize_articles(news_source):
+    if st.button("Summarize Article"):
+        if not validators.url(url):
+            st.error(
+                "Please enter a valid URL or this news agency doesn't allow news parsing"
+            )
+        else:
+            article_info = summarize_article(url)
+            if article_info:
+                title, authors, publish_date, summary, top_image, sentiment = (
+                    article_info
+                )
+
+                st.subheader("Summary:")
+                st.write(summary)
+
+                st.subheader("Details:")
+                st.write(f"Title: {title}")
+                st.write(f"Authors: {authors}")
+                st.write(f"Publish Date: {publish_date}")
+                st.image(top_image, caption="Top Image", use_column_width=True)
+                st.write(f"Sentiment: {sentiment}")
+
+                st.subheader("Original Article:")
+                st.write(f"You can read the full article [here]({url}).")
+            else:
+                st.error(
+                    "Failed to summarize the article. This news agency doesn't allow news parsing."
+                )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    st.header("Select a news source:")
+    dropdown_button_key = "dropdown_button"
+    news_source = st.selectbox(
+        "Choose a news source:",
+        ["Indian Express", "Round Table India", "Times of India", "India Today"],
+        key=dropdown_button_key,
+    )
+
+    if st.button(
+        f"Summarize Top 5 Articles from {news_source}", key=f"{news_source}_button"
+    ):
         top_articles = get_top_articles(news_source)
         if top_articles:
             for article_url in top_articles:
@@ -135,31 +180,7 @@ def main():
                 else:
                     st.error(f"Failed to summarize article: {article_url}")
         else:
-            st.error("Failed to fetch top articles from the selected news source.")
-
-    # Function to summarize articles from Indian Express
-    def summarize_indian_express_articles():
-        st.header("Summarize Today's Top 5 News Articles From:")
-        # Automatically select Indian Express
-        st.write("Indian Express")
-        # Automatically summarize top 5 articles from Indian Express
-        summarize_articles("Indian Express")
-
-    # If the user loads the page, automatically summarize top 5 articles from Indian Express
-    summarize_indian_express_articles()
-
-    # Remaining code for user interaction
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    st.header("Summarize Today's Top 5 News Articles From:")
-    news_source = st.selectbox(
-        "Select a news source:",
-        ["Indian Express", "Round Table India", "Times of India", "India Today"],
-    )
-    if st.button(f"Summarize Top 5 Articles from {news_source}"):
-        summarize_articles(news_source)
+            st.error(f"Failed to fetch top articles from {news_source}.")
 
 
 if __name__ == "__main__":
