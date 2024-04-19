@@ -72,7 +72,8 @@ def summarize_article(url):
     )
 
     # Generate summary with approximately 100 words
-    summary = generate_summary(article.text, max_words=100)
+    # summary = generate_summary(article.text, max_words=100)
+    summary = article.summary
 
     top_image = article.top_image  # Get the top image URL
 
@@ -95,6 +96,7 @@ def get_top_articles(news_source):
         "Indian Express": "https://indianexpress.com/",
         "India Today": "https://www.indiatoday.in/",
         "Times of India": "https://timesofindia.indiatimes.com/",
+        "Round Table India ": "https://www.roundtableindia.co.in/category/perspective/gender/",
     }
 
     source_url = news_sources.get(news_source)
@@ -145,9 +147,10 @@ def main():
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.header("Summarize Todays Top 5 Articles From :")
+    st.header("Summarize Today's Top 5 Articles From :")
     news_source = st.selectbox(
-        "Select a news source:", ["Indian Express", "Times of India", "India Today"]
+        "Select a news source:",
+        ["Indian Express", "Round Table India", "Times of India", "India Today"],
     )
     if st.button(f"Summarize Top 5 Articles from {news_source}"):
         if news_source == "Indian Express":  # Set default news source
